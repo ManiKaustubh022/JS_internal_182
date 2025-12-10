@@ -17,12 +17,20 @@
 // console.log(c)
 // console.log(d)
 
-let a="abc"
-const b=""
-let c=null
-let d;
+// let a="abc"
+// const b=""
+// let c=null
+// let d;
 
+// console.log(a)
+// console.log(b)
+// console.log(c)
+// console.log(d)
+
+let score="33abcd"
+console.log(typeof(score))
+console.log(typeof score)
+
+let a=Number(score)
+console.log(typeof(a))
 console.log(a)
-console.log(b)
-console.log(c)
-console.log(d)
