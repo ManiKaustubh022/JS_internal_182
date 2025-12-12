@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form</title>
+</head>
+<body>
+    
+    <form id="formid" >
+        <input placeholder="Enter Name" id="n1"> <br><br>
+        <input placeholder="Enter Password" id="ps1"> <br><br>
+        <button type="submit">Submit</button>
+
+        <p style="color:red;" id="p1"></p>
+    </form>
+    <script>
+        document.getElementById("formid").addEventListener("submit",function(event){
+            event.preventDefault();
+            let name=document.getElementById("n1").value.trim();
+            let error=document.getElementById("p1");
+
+            if(name==""){
+                error.innerHTML="Value cannot be empty";
+            }
+            else{
+                error.style.color="purple";
+                error.innerHTML="Sucessful !";
+            }
+
+        });
+
+        let a=document.getElementById("p1")
+    </script>
+    
+</body>
+</html>
