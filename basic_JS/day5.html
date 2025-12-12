@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <title>Example of DO with JS</title>
+</head>
+<body id="bgi">
+    <h1 id="hid1">This is First Heading</h1>
+    <h2 id="hid2">this is second heading</h2>
+    <button onclick="fun1()">Click</button>
+    <button onclick="fun2()">Click</button>
+    <button id="bid1">Change Caption</button>
+    <button id="bid2">Change Color</button>
+
+    <button id="bg1">Red</button>
+    <button id="bg2">Green</button>
+    <button id="bg3">blue</button>
+    
+
+    <script>
+        document.getElementById("bid1").addEventListener("click", function(){
+
+        document.getElementById("hid1").innerHTML="New Event Listener Value";
+         document.getElementById("hid2").innerHTML="Second Button Event Listener";
+
+        });
+
+
+        document.getElementById("bid2").addEventListener("click", function(){
+            document.getElementById("hid1").style.color="Red";
+         document.getElementById("hid2").style.color="blue";
+
+        });
+
+         document.getElementById("bg1").addEventListener("click", function(){
+            document.getElementById("bgi").style.backgroundColor="Red";
+        
+        });
+        document.getElementById("bg2").addEventListener("click", function(){
+       
+            document.getElementById("bgi").style.backgroundColor="Green";
+   
+        });
+        document.getElementById("bg3").addEventListener("click", function(){
+          
+            document.getElementById("bgi").style.backgroundColor="blue";
+
+        });
+        function fun1(){
+            document.getElementById("hid1").innerHTML="New Value";
+        }
+        function fun2(){
+            document.getElementById("hid2").innerHTML="Second Button Event";
+        }
+        
+    </script>
+</body>
+</html>
