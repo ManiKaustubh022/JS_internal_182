@@ -7,3 +7,6 @@ Server side L-A-M-P -> Linux Apache MySQL Php
 W-A-M-P --> Windows Apache MySQL Php
 
 IP address is of 32 bit
+
+Let params =new URLSearchParams(window.location.search);
+==> Connects one page from another

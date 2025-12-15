@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>Login / Sign Up</title>
+	<style>
+		:root{--accent:#6c63ff;--glass:rgba(255,255,255,0.08);--glass-2:rgba(255,255,255,0.12)}
+		html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
+		body{display:grid;place-items:center;min-height:100vh;background:linear-gradient(135deg,#0f172a 0%, #0b1220 100%);color:#e6eef8}
+
+		/* decorative blurred background layer */
+		.bg-layer{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(ellipse at 10% 20%, rgba(108,99,255,0.16), transparent 10%), radial-gradient(ellipse at 90% 80%, rgba(99,255,216,0.08), transparent 10%), linear-gradient(120deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));filter:blur(40px);transform:scale(1.1)}
+
+		.auth-card{position:relative;z-index:2;width:360px;max-width:calc(100% - 32px);background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));border-radius:12px;padding:28px 24px;box-shadow:0 8px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.06);backdrop-filter:blur(6px)}
+		.brand{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+		.logo{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#43e97b);display:grid;place-items:center;font-weight:700;color:white}
+		h1{margin:0;font-size:20px}
+		p.lead{margin:6px 0 18px;color:#cfe6ff;font-size:13px}
+
+		form{display:grid;gap:12px}
+		.field{display:flex;flex-direction:column}
+		label{font-size:12px;color:#c8dbff;margin-bottom:6px}
+		input{padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit;outline:none;font-size:14px}
+		input::placeholder{color:rgba(230,238,248,0.4)}
+		.actions{display:flex;align-items:center;justify-content:space-between;margin-top:6px}
+		button{cursor:pointer;padding:10px 14px;border-radius:8px;border:none;background:var(--accent);color:white;font-weight:600}
+		.link{background:none;border:none;color:var(--accent);cursor:pointer;font-weight:600}
+
+		.switch{display:flex;gap:8px;justify-content:center;margin-top:12px}
+		.small{font-size:13px;color:#bcd8ff}
+
+		/* hide forms via class */
+		.hidden{display:none}
+
+		/* responsive */
+		@media (max-width:420px){.auth-card{padding:20px}}
+	</style>
+</head>
+<body>
+	<div class="bg-layer" aria-hidden="true"></div>
+
+	<main class="auth-card" role="main">
+		<div class="brand">
+			<div class="logo">A</div>
+			<div>
+				<h1>Welcome Back</h1>
+				<p class="lead">Sign in to continue or create a new account</p>
+			</div>
+		</div>
+
+		<!-- Login form -->
+		<form id="loginForm">
+			<div class="field">
+				<label for="login-username">Username</label>
+				<input id="login-username" name="username" type="text" placeholder="Your username (optional)" />
+			</div>
+			<div class="field">
+				<label for="login-email">Email</label>
+				<input id="login-email" name="email" type="email" placeholder="you@example.com" required />
+			</div>
+			<div class="field">
+				<label for="login-password">Password</label>
+				<input id="login-password" name="password" type="password" placeholder="Password" required />
+			</div>
+			<div class="actions">
+				<button type="submit">Sign In</button>
+				<button type="button" class="link" id="toSignup">Create account</button>
+			</div>
+		</form>
+
+		<!-- Signup form (hidden by default) -->
+		<form id="signupForm" class="hidden" aria-hidden="true">
+			<div class="field">
+				<label for="signup-username">Username</label>
+				<input id="signup-username" name="username" type="text" placeholder="Choose a username" required />
+			</div>
+			<div class="field">
+				<label for="signup-email">Email</label>
+				<input id="signup-email" name="email" type="email" placeholder="you@example.com" required />
+			</div>
+			<div class="field">
+				<label for="signup-password">Password</label>
+				<input id="signup-password" name="password" type="password" placeholder="Create a password" required />
+			</div>
+			<div class="actions">
+				<button type="submit">Create account</button>
+				<button type="button" class="link" id="toLogin">Have an account?</button>
+			</div>
+		</form>
+
+		<div class="switch small" id="message">Or sign in with your email and password.</div>
+	</main>
+
+	<script>
+		const loginForm = document.getElementById('loginForm');
+		const signupForm = document.getElementById('signupForm');
+		const toSignup = document.getElementById('toSignup');
+		const toLogin = document.getElementById('toLogin');
+		const message = document.getElementById('message');
+
+		toSignup.addEventListener('click', ()=>{
+			loginForm.classList.add('hidden');
+			loginForm.setAttribute('aria-hidden','true');
+			signupForm.classList.remove('hidden');
+			signupForm.removeAttribute('aria-hidden');
+			message.textContent = 'Create your account — it only takes a minute.'
+		})
+		toLogin.addEventListener('click', ()=>{
+			signupForm.classList.add('hidden');
+			signupForm.setAttribute('aria-hidden','true');
+			loginForm.classList.remove('hidden');
+			loginForm.removeAttribute('aria-hidden');
+			message.textContent = 'Or sign in with your email and password.'
+		})
+
+		// simple client-side handlers (replace with real auth)
+		loginForm.addEventListener('submit', e=>{
+			e.preventDefault();
+			const email = document.getElementById('login-email').value.trim();
+			const pass = document.getElementById('login-password').value;
+			if(!email || !pass){alert('Please enter email and password');return}
+			alert('Logged in (demo): ' + email);
+			loginForm.reset();
+		})
+
+		signupForm.addEventListener('submit', e=>{
+			e.preventDefault();
+			const user = document.getElementById('signup-username').value.trim();
+			const email = document.getElementById('signup-email').value.trim();
+			const pass = document.getElementById('signup-password').value;
+			if(!user || !email || !pass){alert('Please complete all fields');return}
+			alert('Account created (demo): ' + user + ' — ' + email);
+			signupForm.reset();
+			toLogin.click();
+		})
+	</script>
+</body>
+</html>
+
