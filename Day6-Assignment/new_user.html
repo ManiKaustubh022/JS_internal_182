@@ -6,15 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="newpage.html" method="get">
+    <form action="newpage.html" method="get" id="formid">
         <table>
             <tr>
                 <td> <label id="L1">User Name :</label></td>
-                <td> <input for="L1"  type="text" placeholder="Enter User Name" name="Firstname"></td>
+                <td> <input for="L1" id="n1" type="text" placeholder="Enter User Name" name="Firstname"></td>
             </tr>
             <tr>
                 <td><label id="L2">Password</label></td>
-                <td><input for="L2" type="password" placeholder="Enter Password"></td>
+                <td><input for="L2" id="n2" type="password" placeholder="Enter Password"></td>
             </tr>
             <tr>
                 <td>
@@ -24,5 +24,29 @@
             </tr>
         </table>
         </form>
+         <script>
+        document.getElementById("formid").addEventListener("submit",function(event){
+            event.preventDefault();
+            let name=document.getElementById("n1").value.trim();
+            let error=document.getElementById("p1");
+            let password=document.getElementById("n2").value.trim();
+
+            if(name==""){
+                error.innerHTML="Value cannot be empty";
+            }
+            else   if(password==""){
+                error.innerHTML="Value cannot be empty";
+            }
+            else{
+                error.style.color="purple";
+                error.innerHTML="Sucessful !";}
+
+
+            
+
+        });
+
+        let a=document.getElementById("p1")
+    </script>
 </body>
 </html>
